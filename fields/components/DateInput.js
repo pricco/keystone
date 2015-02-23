@@ -1,6 +1,4 @@
-var React = require('react'),
-	Pikaday = require('pikaday'),
-	moment = require('moment');
+var React = require('react');
 
 module.exports = React.createClass({
 
@@ -21,35 +19,10 @@ module.exports = React.createClass({
 		this.setState({
 			value: newProps.value
 		});
-		this.picker.setDate(newProps.value);
-	},
-
-	componentDidMount: function() {
-		// add date picker
-		this.picker = new Pikaday({ 
-			field: this.getDOMNode(),
-			format: this.props.format,
-			onSelect: function(date) {
-				if (this.props.onChange && this.picker.toString() !== this.props.value) {
-					this.props.onChange(this.picker.toString());
-				}
-			}.bind(this)
-		});			
-	},
-
-	componentWillUnmount: function() {
-		// clean up
-		this.picker.destroy();
 	},
 	
 	handleChange: function(e) {
 		this.setState({ value: e.target.value });
-	},
-	
-	handleBlur: function(e) {
-		if (this.state.value !== this.props.value) {
-			this.picker.setDate(this.state.value);
-		}
 	},
 
 	render: function() {
